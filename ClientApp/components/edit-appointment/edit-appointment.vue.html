@@ -1,0 +1,80 @@
+﻿<template>
+    <div>
+        <div v-if="loaded">
+            <form class="form-horizontal" id="appointmentForm" v-on:submit.prevent="updateAppointment(appointment)">
+                <fieldset>
+                    <legend>Edit Appointment Details Below</legend>
+                    <div class="form-group">
+                        <label for="inputTitle" class="col-lg-2 control-label">Title</label>
+                        <div class="col-lg-10">
+                            <input required type="text" v-model="appointment.title" class="form-control" id="inputTitle" name="title" placeholder="Title of the appointment">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="col-lg-2 control-label">Description</label>
+                        <div class="col-lg-10">
+                            <textarea class="form-control" name="description" v-model="appointment.description" rows="3" id="description"></textarea>
+                            <span class="help-block">Provide an adequate description and all important details(Address, Contacts, Special Instructions, etc).</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="date" class="col-lg-2 control-label">Date</label>
+                        <div class="col-lg-10">
+                            <input type="date" class="form-control" name="date" v-model="appointment.date" required pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="time" class="col-lg-2 control-label">Date</label>
+                        <div class="col-lg-10">
+                            <input type="time" id="time" class="form-control" name="time" v-model="appointment.time" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="type" class="col-lg-2 control-label">Type</label>
+                        <div class="col-lg-10">
+                            <select required class="form-control" v-model="appointment.type" id="type">
+                                <option disabled value="">Please select an appointment type</option>
+                                <option>Appointment</option>
+                                <option>Meeting</option>
+                                <option>Reminder</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Work Related</label>
+                        <div class="col-lg-10">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="true" v-model="appointment.workrelated">
+                                    Yes
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="false" v-model="appointment.workrelated">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="reset" class="btn btn-default" v-on:click="clearForm()">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                    <div v-if="updated">
+                        <div class="alert alert-success">
+                            <strong>Success!</strong> Your appointment was updated.
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div v-else>
+            ...Loading
+        </div>
+    </div>
+</template>
+
+<script src="./edit-appointment.ts"></script>

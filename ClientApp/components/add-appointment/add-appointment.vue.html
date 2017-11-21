@@ -1,0 +1,74 @@
+<template>
+    <div>
+        <form class="form-horizontal" id="appointmentForm" v-on:submit.prevent="sendData(form)">
+            <fieldset>
+                <legend>Add Appointment Details Below</legend>
+                <div class="form-group">
+                    <label for="inputTitle" class="col-lg-2 control-label">Title</label>
+                    <div class="col-lg-10">
+                        <input required type="text" v-model="form.title" class="form-control" id="inputTitle" name="title" placeholder="Title of the appointment">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-lg-2 control-label">Description</label>
+                    <div class="col-lg-10">
+                        <textarea class="form-control" name="description" v-model="form.description" rows="3" id="description"></textarea>
+                        <span class="help-block">Provide an adequate description and all important details(Address, Contacts, Special Instructions, etc).</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="date" class="col-lg-2 control-label">Date</label>
+                    <div class="col-lg-10">
+                        <input type="date" class="form-control" name="date" v-model="form.date" required pattern="\d{1,2}/\d{1,2}/\d{4}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="time" class="col-lg-2 control-label">Date</label>
+                    <div class="col-lg-10">
+                        <input type="time" id="time" class="form-control" name="time" v-model="form.time" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="type" class="col-lg-2 control-label">Type</label>
+                    <div class="col-lg-10">
+                        <select required class="form-control" v-model="form.type" id="type">
+                            <option disabled value="">Please select an appointment type</option>
+                            <option>Appointment</option>
+                            <option>Meeting</option>
+                            <option>Reminder</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Work Related</label>
+                    <div class="col-lg-10">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios1" value=true v-model="form.workRelated" checked="checked">
+                                Yes
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios2" value=false v-model="form.workRelated">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button v-on:click="clear(form)" type="reset" class="btn btn-default">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+                <div v-if="added">
+                    <div class="alert alert-success">
+                        <strong>Success!</strong> New appointment was added.
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</template>
+<script src="./add-appointment.ts"></script>
